@@ -1,8 +1,36 @@
+import { Button } from "@/components/ui/button"
 import * as Rb from "@/lib/rb-types"
-import { Cell, ColumnDef } from "@tanstack/react-table"
+import { Column, ColumnDef } from "@tanstack/react-table"
+import { ChevronDown } from "lucide-react"
 
 function Header({ name }: { name: String }) {
   return <div className="text-xs">{name}</div>
+}
+
+function SortableHeader({
+  name,
+  column,
+}: {
+  name: String
+  column: Column<Rb.UserScore, unknown>
+}) {
+  const showSortingIndicator = column.getIsSorted() === "desc"
+  return (
+    <div className="flex items-center justify-center">
+      <Button
+        variant="ghost"
+        className="text-xs h-8 p-[10px]"
+        onClick={() => column.toggleSorting(true)}
+      >
+        {name}
+        {
+          <ChevronDown
+            className={`ml-1 h-4 w-4 ${showSortingIndicator ? "visible" : "invisible"}`}
+          />
+        }
+      </Button>
+    </div>
+  )
 }
 
 export const columnDefs: ColumnDef<Rb.UserScore>[] = [
@@ -15,14 +43,14 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
   },
   {
     accessorKey: "goal",
-    header: () => <Header name="Goals" />,
+    header: ({ column }) => <SortableHeader name="Goal" column={column} />,
     cell: ({ getValue }) => {
       return <div className="text-center font-medium">{getValue<number>()}</div>
     },
   },
   {
     accessorKey: "assist",
-    header: () => <Header name="Assist" />,
+    header: ({ column }) => <SortableHeader name="Assist" column={column} />,
     cell: ({ cell }) => {
       return (
         <div className="text-center font-medium">
@@ -33,7 +61,7 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
   },
   {
     accessorKey: "booking",
-    header: () => <Header name="Booking" />,
+    header: ({ column }) => <SortableHeader name="Booking" column={column} />,
     cell: ({ cell }) => {
       return (
         <div className="text-center font-medium">
@@ -44,7 +72,7 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
   },
   {
     accessorKey: "total",
-    header: () => <Header name="Total" />,
+    header: ({ column }) => <SortableHeader name="Total" column={column} />,
     cell: ({ cell }) => {
       return (
         <div className="text-center font-medium">
