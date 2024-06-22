@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getScores } from "./page"
 import ScoreTable from "./score-table"
+import { columnDefs } from "./score-table/column-defs"
 
 export default function Scoreboard() {
   const { data } = useQuery({
@@ -10,6 +11,16 @@ export default function Scoreboard() {
     queryFn: () => getScores(),
   })
   console.log(data)
+  const scoreData =
+    data &&
+    Object.entries(data).map(([user, score]) => ({
+      user,
+      ...score,
+    }))
 
-  return <div>{data && <ScoreTable data={data} />}</div>
+  return (
+    <div>
+      {scoreData && <ScoreTable data={scoreData} columns={columnDefs} />}
+    </div>
+  )
 }
