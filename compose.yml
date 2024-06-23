@@ -1,8 +1,8 @@
 services:
-  rb-scores-frontend:
-    image: zenoli/rb-scores-frontend
+  rb-scoreboard-frontend:
+    image: zenoli/rb-scoreboard-frontend
     build: .
-    container_name: rb-scores-frontend
+    container_name: rb-scoreboard-frontend
     ports:
       - "3000:3000"
 
