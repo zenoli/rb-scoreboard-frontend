@@ -11,7 +11,6 @@ export default function Scoreboard() {
     queryFn: () => getScores(),
     refetchInterval: 30 * 1000,
   })
-  console.log(data)
   const scoreData =
     data &&
     Object.entries(data).map(([user, score]) => ({

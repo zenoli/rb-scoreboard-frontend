@@ -64,12 +64,6 @@ export function DataTable<TData, TValue>({
     },
   })
 
-  console.log("getRowModel()", table.getRowModel())
-  console.log("getSelectedRowModel()", table.getSelectedRowModel())
-  // console.log("getCoreRowModel()", table.getCoreRowModel())
-  // console.log("getSortedRowModel()", table.getSortedRowModel())
-  // console.log("getPaginationRowModel()", table.getPaginationRowModel())
-
   return (
     <div>
       <div className="flex items-center py-4">
