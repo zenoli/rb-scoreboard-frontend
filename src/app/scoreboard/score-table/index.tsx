@@ -54,7 +54,7 @@ export default function ScoreTable<TData, TValue>({
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="px-0 first:pl-2">
+                  <TableHead key={header.id} className="px-0 first:pl-2 first:w-1/4">
                     {header.isPlaceholder
                       ? null
                       : flexRender(

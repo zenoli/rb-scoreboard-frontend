@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge"
 import * as Rb from "@/lib/rb-types"
 import { Column, ColumnDef } from "@tanstack/react-table"
+import clsx from "clsx"
 import {
-  UsersRound,
   Handshake,
   Target,
   Shield,
@@ -32,6 +32,26 @@ function Header({ name, column, icon: Icon, handleClick }: HeaderProps) {
   )
 }
 
+function ScoreCell({
+  column,
+  value,
+}: {
+  column: Column<Rb.UserScore>
+  value: number
+}) {
+  const isSorted = column.getIsSorted() === "desc"
+  return (
+    <div className="text-center font-medium">
+      <Badge
+        variant="secondary"
+        className={clsx({ "bg-transparent": !isSorted })}
+      >
+        {value}
+      </Badge>
+    </div>
+  )
+}
+
 function SortableHeader(props: Omit<HeaderProps, "handleClick">) {
   return (
     <Header handleClick={(column) => column.toggleSorting(true)} {...props} />
@@ -42,7 +62,9 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
   {
     accessorKey: "user",
     header: ({ column }) => (
-      <Header name="Name" column={column} icon={UsersRound} />
+      <div className="flex translate-y-2 items-end text-[0.6rem] font-bold uppercase">
+        Name
+      </div>
     ),
     cell: ({ getValue }) => (
       <div className="text-left font-medium">{getValue<string>()}</div>
@@ -53,60 +75,44 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
     header: ({ column }) => (
       <SortableHeader name="Goal" column={column} icon={Target} />
     ),
-    cell: ({ getValue }) => {
-      return <div className="text-center font-medium">{getValue<number>()}</div>
-    },
+    cell: ({ column, getValue }) => (
+      <ScoreCell column={column} value={getValue<number>()} />
+    ),
   },
   {
     accessorKey: "assist",
     header: ({ column }) => (
       <SortableHeader name="Assist" column={column} icon={Handshake} />
     ),
-    cell: ({ cell }) => {
-      return (
-        <div className="text-center font-medium">
-          {cell.getValue() as number}
-        </div>
-      )
-    },
+    cell: ({ column, getValue }) => (
+      <ScoreCell column={column} value={getValue<number>()} />
+    ),
   },
   {
     accessorKey: "booking",
     header: ({ column }) => (
       <SortableHeader name="Booking" column={column} icon={Layers2} />
     ),
-    cell: ({ cell }) => {
-      return (
-        <div className="text-center font-medium">
-          {cell.getValue() as number}
-        </div>
-      )
-    },
+    cell: ({ column, getValue }) => (
+      <ScoreCell column={column} value={getValue<number>()} />
+    ),
   },
   {
     accessorKey: "booking",
     header: ({ column }) => (
       <SortableHeader name="Cl. Sht" column={column} icon={Shield} />
     ),
-    cell: ({ cell }) => {
-      return (
-        <div className="text-center font-medium">
-          {cell.getValue() as number}
-        </div>
-      )
-    },
+    cell: ({ column, getValue }) => (
+      <ScoreCell column={column} value={getValue<number>()} />
+    ),
   },
   {
     accessorKey: "total",
     header: ({ column }) => (
       <SortableHeader name="Total" column={column} icon={Sigma} />
     ),
-    cell: ({ cell }) => {
-      return (
-        <div className="text-center font-medium">
-          <Badge variant="secondary">{cell.getValue() as number}</Badge>
-        </div>
-      )
-    },
+    cell: ({ column, getValue }) => (
+      <ScoreCell column={column} value={getValue<number>()} />
+    ),
   },
 ]
