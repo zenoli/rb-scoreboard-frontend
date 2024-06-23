@@ -1,0 +1,8 @@
+services:
+  rb-scores-frontend:
+    image: zenoli/rb-scores-frontend
+    build: .
+    container_name: rb-scores-frontend
+    ports:
+      - "3000:3000"
+
