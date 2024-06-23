@@ -1,9 +1,9 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import { getScores } from "./page"
 import ScoreTable from "./score-table"
 import { columnDefs } from "./score-table/column-defs"
+import { getScores } from "@/lib/api/scores"
 
 export default function Scoreboard() {
   const { data } = useQuery({
