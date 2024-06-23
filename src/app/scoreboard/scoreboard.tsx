@@ -9,6 +9,7 @@ export default function Scoreboard() {
   const { data } = useQuery({
     queryKey: ["scores"],
     queryFn: () => getScores(),
+    refetchInterval: 30 * 1000,
   })
   console.log(data)
   const scoreData =

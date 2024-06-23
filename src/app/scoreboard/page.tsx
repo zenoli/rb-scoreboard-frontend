@@ -6,8 +6,9 @@ import {
 import Scoreboard from "./scoreboard"
 import * as Rb from "@/lib/rb-types"
 
-export async function getScores() {
-  const res = await fetch("http://localhost:3001/api/scores")
+export async function getScores(server?: boolean) {
+  const backendUri = process.env.BACKEND_URI || "http://localhost:3001"
+  const res = await fetch(`${server ? backendUri : ""}/api/scores`)
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -24,7 +25,7 @@ export default async function ScoreboardPage() {
 
   await queryClient.prefetchQuery({
     queryKey: ["scores"],
-    queryFn: getScores,
+    queryFn: () => getScores(true),
   })
 
   return (
