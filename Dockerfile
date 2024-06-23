@@ -27,7 +27,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-ARG BACKEND_URI
+ARG BACKEND_URI=http://rb-scoreboard-backend.railway.internal:3001
 ENV BACKEND_URI $BACKEND_URI
 
 RUN \
