@@ -15,3 +15,15 @@ export async function getScores(server?: boolean) {
 
   return (await res.json()) as Rb.ScoreMap
 }
+
+export async function get(route: string, server?: boolean) {
+  const backendUri = process.env.BACKEND_URI || "http://localhost:3001"
+  const res = await fetch(`${server ? backendUri : ""}/api/${route}`, {
+    next: { revalidate: 30 },
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+
+  return await res.json()
+}
