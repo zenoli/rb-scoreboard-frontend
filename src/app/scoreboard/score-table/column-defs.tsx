@@ -98,7 +98,7 @@ export const columnDefs: ColumnDef<Rb.UserScore>[] = [
     ),
   },
   {
-    accessorKey: "cleanSheets",
+    accessorKey: "cleanSheet",
     header: ({ column }) => (
       <SortableHeader name="Cl. Sht" column={column} icon={Shield} />
     ),
