@@ -12,6 +12,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { TeamIcons } from "@/components/TeamIcons"
+import { PlayerIcon } from "@/components/PlayerIcon"
 
 interface UserEventListProps {
   user: string
@@ -24,7 +26,6 @@ export default function UserEventList({ user }: UserEventListProps) {
     refetchInterval: 30 * 1000,
   })
 
-  console.log(data)
   function getEventKey(event: Rb.Event) {
     return `${event.name}_${event.minute}_${event.player.id}_${event.team.shortCode}_${event.oponentTeam.shortCode}`
   }
@@ -35,20 +36,15 @@ export default function UserEventList({ user }: UserEventListProps) {
         data.map((event) => {
           const player = event.player
           return (
-            <Card key={getEventKey(event)} className="flex items-center justify-between gap-2 h-20">
-              <Avatar>
-                <AvatarImage src={player.imagePath} />
-                <AvatarFallback>{player.displayName}</AvatarFallback>
-              </Avatar>
+            <Card
+              key={getEventKey(event)}
+              className="flex h-20 items-center justify-between gap-2"
+            >
+              <PlayerIcon player={player} />
               <div>{player.displayName}</div>
               <div>{event.name}</div>
               <div>{event.minute}</div>
-              <Avatar>
-                <AvatarImage src={event.team.imagePath} />
-              </Avatar>
-              <Avatar>
-                <AvatarImage src={event.oponentTeam.imagePath} />
-              </Avatar>
+              <TeamIcons team={event.team} opponent={event.oponentTeam} />
             </Card>
           )
         })}
