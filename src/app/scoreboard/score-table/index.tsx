@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useState } from "react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
@@ -76,7 +75,7 @@ export default function ScoreTable<TData, TValue>({
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
+            table.getRowModel().rows.map((row: any) => (
               <TableRow
                 onClick={() =>
                   router.push(
@@ -86,7 +85,7 @@ export default function ScoreTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
-                {row.getVisibleCells().map((cell) => (
+                {row.getVisibleCells().map((cell: any) => (
                   <TableCell key={cell.id} className="px-0 first:pl-2">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

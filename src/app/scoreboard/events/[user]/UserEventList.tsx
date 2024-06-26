@@ -16,6 +16,7 @@ import { TeamIcons } from "@/components/TeamIcons"
 import { PlayerIcon } from "@/components/PlayerIcon"
 import UserEventTable from "./user-event-table"
 import { columnDefs } from "./user-event-table/column-defs"
+import { ColumnDef } from "@tanstack/react-table"
 
 interface UserEventListProps {
   user: string
