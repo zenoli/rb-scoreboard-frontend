@@ -21,6 +21,7 @@ export function TeamIcon({ team }: TeamIconProps) {
         fill
         className={getTwOverrideClasses(team.shortCode)}
         style={{ objectFit: "cover" }}
+        sizes="(max-width: 48px)"
       />
     </div>
   )

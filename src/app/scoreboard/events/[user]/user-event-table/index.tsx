@@ -17,37 +17,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export default function ScoreTable<TData, TValue>({
+export default function UserEventTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([
-    {
-      id: "total",
-      desc: true,
-    },
-  ])
-
-  const router = useRouter()
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    state: {
-      sorting,
-    },
   })
 
   return (
@@ -60,7 +44,7 @@ export default function ScoreTable<TData, TValue>({
                 return (
                   <TableHead
                     key={header.id}
-                    className="px-0 first:w-1/4 first:pl-2"
+                    className="px-0 first:w-1/5 first:pl-2 [&:nth-child(2)]:w-1/5 [&:nth-child(4)]:w-[18%]"
                   >
                     {header.isPlaceholder
                       ? null
@@ -78,11 +62,6 @@ export default function ScoreTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-                onClick={() =>
-                  router.push(
-                    `scoreboard/events/${(row.original.user as string).toLowerCase()}`
-                  )
-                }
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >

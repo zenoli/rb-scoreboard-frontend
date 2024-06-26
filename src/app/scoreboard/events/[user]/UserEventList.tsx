@@ -14,6 +14,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { TeamIcons } from "@/components/TeamIcons"
 import { PlayerIcon } from "@/components/PlayerIcon"
+import UserEventTable from "./user-event-table"
+import { columnDefs } from "./user-event-table/column-defs"
 
 interface UserEventListProps {
   user: string
@@ -31,23 +33,6 @@ export default function UserEventList({ user }: UserEventListProps) {
   }
 
   return (
-    <div>
-      {data &&
-        data.map((event) => {
-          const player = event.player
-          return (
-            <Card
-              key={getEventKey(event)}
-              className="flex h-20 items-center justify-between gap-2"
-            >
-              <PlayerIcon player={player} />
-              <div>{player.displayName}</div>
-              <div>{event.name}</div>
-              <div>{event.minute}</div>
-              <TeamIcons team={event.team} opponent={event.oponentTeam} />
-            </Card>
-          )
-        })}
-    </div>
+    <div>{data && <UserEventTable data={data} columns={columnDefs} />}</div>
   )
 }

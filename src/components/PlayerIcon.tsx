@@ -13,6 +13,7 @@ export function PlayerIcon({ player }: PlayerIconProps) {
         alt={player.displayName}
         fill
         style={{ objectFit: "cover" }}
+        sizes="(max-width: 48px)"
       />
     </div>
   )
