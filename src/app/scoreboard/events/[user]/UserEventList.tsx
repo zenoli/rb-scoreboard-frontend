@@ -17,6 +17,7 @@ import { PlayerIcon } from "@/components/PlayerIcon"
 import UserEventTable from "./user-event-table"
 import { columnDefs } from "./user-event-table/column-defs"
 import { ColumnDef } from "@tanstack/react-table"
+import * as config from "../../../../lib/config"
 
 interface UserEventListProps {
   user: string
@@ -26,7 +27,7 @@ export default function UserEventList({ user }: UserEventListProps) {
   const { data } = useQuery({
     queryKey: ["events", user],
     queryFn: ({ queryKey }) => get(queryKey.join("/")) as Promise<Rb.Event[]>,
-    refetchInterval: 30 * 1000,
+    refetchInterval: config.REFETCH_INTERVAL * 1000,
   })
 
   function getEventKey(event: Rb.Event) {
