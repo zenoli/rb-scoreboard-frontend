@@ -6,12 +6,13 @@ import { columnDefs } from "./score-table/column-defs"
 import { getScores } from "@/lib/api/scores"
 import { PuffLoader } from "react-spinners"
 import clsx from "clsx"
+import * as config from "../../lib/config"
 
 export default function Scoreboard() {
   const { data, isFetching } = useQuery({
     queryKey: ["scores"],
     queryFn: () => getScores(),
-    refetchInterval: 30 * 1000,
+    refetchInterval: config.REFETCH_INTERVAL * 1000,
   })
   const scoreData =
     data &&
