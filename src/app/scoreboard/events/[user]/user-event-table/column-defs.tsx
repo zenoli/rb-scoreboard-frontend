@@ -1,7 +1,7 @@
 import { PlayerIcon } from "@/components/PlayerIcon"
 import { TeamIcons } from "@/components/TeamIcons"
 import * as Rb from "@/lib/rb-types"
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
 import { Clock, Handshake, Layers2, Target } from "lucide-react"
 
 function ScoreType({ type }: { type: string }) {
@@ -24,12 +24,13 @@ function ScoreType({ type }: { type: string }) {
   )
 }
 
+const columnHelper = createColumnHelper<Rb.Event>()
+
 export const columnDefs: ColumnDef<Rb.Event>[] = [
-  {
-    accessorKey: "player",
+  columnHelper.accessor("player", {
     header: () => "Player",
     cell: (info) => <PlayerIcon player={info.getValue<Rb.Player>()} />,
-  },
+  }),
   {
     accessorKey: "player.displayName",
     header: () => <div>Name</div>,

@@ -3,8 +3,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query"
-import { get, getScores } from "@/lib/api/scores"
-import UserEventList from "./UserEventList"
+import { get } from "@/lib/api/scores"
+import UserEventList from "./user-event-list"
 
 export const dynamic = "force-dynamic"
 
