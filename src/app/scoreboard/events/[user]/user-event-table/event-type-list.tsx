@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Handshake, Layers2, Target } from "lucide-react"
+import { Handshake, Layers2, SearchX, Target } from "lucide-react"
 
 function ScoreIcon({ eventType }: { eventType: string }) {
   const Icon =
@@ -58,9 +58,13 @@ export default function EventTypeList({ eventType, rows }: EventTypeListProps) {
             </TableRow>
           ))
         ) : (
-          <TableRow>
-            <TableCell colSpan={1} className="h-24 text-center">
-              No results.
+          <TableRow className="flex items-center justify-center text-muted-foreground h-20">
+            <TableCell
+              colSpan={1}
+              className="flex items-center justify-center text-muted-foreground gap-2"
+            >
+              <SearchX size={16} />
+              <div>No results.</div>
             </TableCell>
           </TableRow>
         )}

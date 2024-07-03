@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={`${inter.className} p-2 select-none hover:select-text`}>
+      <body className={`${inter.className} p-3 select-none`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <QueryClientProvider>{children}</QueryClientProvider>
         </ThemeProvider>

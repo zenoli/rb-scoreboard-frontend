@@ -19,6 +19,8 @@ export default function UserEventList({ user }: UserEventListProps) {
   })
 
   return (
-    <div>{data && <UserEventTable data={data} columns={columnDefs} />}</div>
+    <div>
+      {data && <UserEventTable user={user} data={data} columns={columnDefs} />}
+    </div>
   )
 }

@@ -29,7 +29,8 @@ function ScoreType({ type, opponent }: { type: string; opponent: string }) {
 const columnHelper = createColumnHelper<Rb.Event>()
 
 export const columnDefs = [
-  columnHelper.accessor("name", {
+  columnHelper.accessor("player.displayName", {
+    id: "score-event",
     header: () => "Player",
     cell: ({ row }) => {
       const event = row.original
