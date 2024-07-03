@@ -2,7 +2,7 @@
 
 import * as Rb from "@/lib/rb-types"
 import {
-  ColumnDef,
+  AccessorKeyColumnDef,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
@@ -13,7 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import EventTypeList from "./event-type-list"
 
 interface UserEventTableProps {
-  columns: ColumnDef<Rb.Event>[]
+  columns: AccessorKeyColumnDef<Rb.Event, string>[]
   data: Rb.Event[]
 }
 
