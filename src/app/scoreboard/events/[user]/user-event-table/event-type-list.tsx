@@ -38,7 +38,7 @@ export default function EventTypeList({ eventType, rows }: EventTypeListProps) {
     <>
       <TableHeader>
         <TableRow key={eventType} className="top-0">
-          <TableHead className="sticky top-0 z-50 bg-black/40 font-bold uppercase backdrop-blur-md">
+          <TableHead className="sticky top-0 z-10 bg-black/40 font-bold uppercase backdrop-blur-md">
             <ScoreIcon eventType={eventType} />
           </TableHead>
         </TableRow>
