@@ -1,10 +1,10 @@
 import { PlayerIcon } from "@/components/PlayerIcon"
 import { TeamIcons } from "@/components/TeamIcons"
 import * as Rb from "@/lib/rb-types"
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
+import { createColumnHelper } from "@tanstack/react-table"
 import { Clock, Handshake, Layers2, Target } from "lucide-react"
 
-function ScoreType({ type }: { type: string }) {
+function ScoreType({ type, opponent }: { type: string; opponent: string }) {
   const Icon = ["Goal", "Penalty"].includes(type)
     ? Target
     : ["Yellowcard", "Redcard", "Yellow/Red card"].includes(type)
@@ -17,55 +17,48 @@ function ScoreType({ type }: { type: string }) {
     "Yellow/Red card": "Yellow/Red",
   }
   return (
-    <div className="flex items-center gap-2 text-[0.55rem] uppercase">
+    <div className="flex items-center gap-2">
       <Icon size={16} />
-      <div>{shortTypeNames[type] ? shortTypeNames[type] : type}</div>
+      <div>
+        {shortTypeNames[type] ? shortTypeNames[type] : type} against {opponent}
+      </div>
     </div>
   )
 }
 
 const columnHelper = createColumnHelper<Rb.Event>()
 
-export const columnDefs: ColumnDef<Rb.Event>[] = [
-  columnHelper.accessor("player", {
+export const columnDefs = [
+  columnHelper.accessor("name", {
     header: () => "Player",
-    cell: (info) => <PlayerIcon player={info.getValue<Rb.Player>()} />,
+    cell: ({ row }) => {
+      const event = row.original
+      return (
+        <div className="flex items-center justify-between">
+          <div className="flex w-full gap-2">
+            <PlayerIcon player={event.player} />
+            <div className="flex grow flex-col gap-1">
+              <div className="text-lg font-semibold leading-none tracking-tight">
+                {row.original.player.displayName}
+              </div>
+              <div className="flex justify-between text-[0.55rem] text-muted-foreground">
+                <ScoreType
+                  type={event.name}
+                  opponent={event.oponentTeam.name}
+                />
+                <div className="flex w-1/3 items-center gap-2">
+                  <Clock size={16} />
+                  {event.minute.toString() +
+                    (event.extraMinute ? `+${event.extraMinute}` : "")}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <TeamIcons team={event.team} opponent={event.oponentTeam} />
+          </div>
+        </div>
+      )
+    },
   }),
-  {
-    accessorKey: "player.displayName",
-    header: () => <div>Name</div>,
-    cell: ({ row }) => (
-      <div className="text-xs">
-        <div>{row.original.player.displayName}</div>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "name",
-    header: () => "Type",
-    cell: ({ getValue }) => <ScoreType type={getValue<string>()} />,
-  },
-  {
-    accessorKey: "minute",
-    header: () => "Time",
-    cell: ({ getValue }) => (
-      <div className="flex items-center gap-2 text-xs">
-        <Clock size={16} />
-        {getValue<number>()}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "team",
-    header: () => "Match",
-    cell: ({ row }) => (
-      <TeamIcons team={row.original.team} opponent={row.original.oponentTeam} />
-    ),
-  },
-
-  // columnHelper.accessor("player", {
-  //   id: "player-icon",
-  //   header: () => "Name",
-  //   cell: ({ getValue }) => <PlayerIcon player={player} />,
-  // }),
 ]

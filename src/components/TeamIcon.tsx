@@ -14,15 +14,20 @@ function getTwOverrideClasses(shortCode: string) {
 
 export function TeamIcon({ team }: TeamIconProps) {
   return (
-    <div className="relative size-8 overflow-hidden rounded-full border-2 border-white">
-      <Image
-        src={team.imagePath}
-        alt={team.shortCode}
-        fill
-        className={getTwOverrideClasses(team.shortCode)}
-        style={{ objectFit: "cover" }}
-        sizes="(max-width: 48px)"
-      />
+    <div className="flex flex-col items-center gap-1">
+      <div className="relative size-8 overflow-hidden rounded-full border-2 border-white">
+        <Image
+          src={team.imagePath}
+          alt={team.shortCode}
+          fill
+          className={getTwOverrideClasses(team.shortCode)}
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 48px)"
+        />
+      </div>
+      <div className="text-[0.55rem] text-muted-foreground">
+        {team.shortCode}
+      </div>
     </div>
   )
 }
