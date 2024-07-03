@@ -67,7 +67,9 @@ export default function UserEventTable({
               eventType="Goals"
               rows={table
                 .getRowModel()
-                .rows.filter((row) => row.original.name === "Goal")}
+                .rows.filter((row) =>
+                  ["Goal", "Penalty"].includes(row.original.name)
+                )}
             />
             <EventTypeList
               eventType="Assists"
