@@ -50,14 +50,14 @@ export default function UserEventTable({
       <CardTitle className="p-3">{getTitle(user)}</CardTitle>
       <div className="flex items-center">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter players..."
           value={
             (table.getColumn("score-event")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
             table.getColumn("score-event")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="h-12"
         />
       </div>
       <div className="flex-grow overflow-hidden rounded-md border">
