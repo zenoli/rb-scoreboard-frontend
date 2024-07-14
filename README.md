@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RB Scoreboard Frontend
 
-## Getting Started
+Next.js frontend for the RB Scoreboard application
 
 ```bash
 npm run dev

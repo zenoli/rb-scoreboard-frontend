@@ -31,8 +31,16 @@ export type Score = {
   [key in ScoreType]: number
 }
 
-export type UserScore = {
-  [key in ScoreType]: number
-} & { user: string }
+// export type UserScore = {
+//   [key in ScoreType]: number
+// } & { user: string }
+//
+// export type PlayerScore = {
+//   [key in ScoreType]: number
+// } & { player: Player }
+
+export type UserScore = Score & { user: User }
+export type PlayerScore = Score & { player: Player }
+
 
 export type ScoreMap = Record<string, Score>
